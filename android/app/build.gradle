@@ -1,0 +1,37 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.edgetx.remote'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.edgetx.remote"
+        minSdk 31          // Android 12 ke atas (HP kamu Android 16)
+        targetSdk 34
+        versionCode 9
+        versionName "3.2"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    // Kunci debug tetap di repo: APK hasil build berikutnya bisa dipasang menimpa yang lama tanpa uninstall
+    signingConfigs {
+        debug {
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+}

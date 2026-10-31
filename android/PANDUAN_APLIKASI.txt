@@ -1,0 +1,41 @@
+APLIKASI ESP32 TX (Android 12 ke atas)
+======================================
+
+A. BUAT APK (satu klik)
+1. Pasang Git untuk Windows sekali saja (git-scm.com/download/win).
+2. Klik dua kali  buat_apk.bat  (repo sudah diisi: PTRFarhan/esp32-tx-app).
+3. Skrip mengirim kode, menunggu GitHub membangun (3 sampai 5 menit), lalu mengunduh ESP32-TX.apk
+   ke folder ini dan membukanya. Kirim ke HP lalu pasang.
+4. Kalau muncul jendela login GitHub saat pertama kali, masuk dan setujui.
+Link tetap APK terbaru: https://github.com/PTRFarhan/esp32-tx-app/releases/download/latest/ESP32-TX.apk
+
+B. UBAH APLIKASI
+- Kode ada di app/src/main/java/com/edgetx/remote/
+  MainActivity (kerangka dan tab), PageControl (kendali), PageMonitor, PageModel,
+  PageSettings (remot), PageUpdate + OtaClient (update firmware), BleLink (Bluetooth), Controls dan Ui (komponen).
+- Setelah mengubah, jalankan buat_apk.bat lagi.
+
+C. PAKAI
+1. Di remot: menu KONEKTIVITAS, Bluetooth ON (WiFi harus OFF, keduanya tidak bisa bersamaan).
+2. Buka aplikasi, Hubungkan. Nama perangkat: ESP32 TX.
+3. Tab Kendali: pilih Input: HP untuk mengendalikan dari HP. Bluetooth putus = kendali kembali ke stik remot.
+4. Tab Monitor/Model/Remot: pantau dan ubah semua pengaturan, langsung tersimpan di remot.
+   Tab Model: tambah, ganti nama, hapus model (tampil juga di menu MODEL remot). Tombol MODEL di tab Kendali memilih model.
+   Tab Remot, kartu Throttle stik HP: centang tengah atau bawah supaya throttle kembali sendiri saat dilepas.
+
+D. UPDATE FIRMWARE (lewat Bluetooth, tanpa WiFi)
+- Siapkan file firmware.bin: PlatformIO build, lalu ambil  .pio/build/esp32dev/firmware.bin
+  (hanya .bin dari build. Kode C++ atau .hex tidak bisa).
+- Pemasangan PERTAMA firmware yang punya fitur ini harus lewat kabel USB (partisi min_spiffs dan NimBLE).
+- Setelah itu: sambungkan aplikasi, tab Update, pilih file, Mulai update. Berkas dikirim lewat Bluetooth
+  (sekitar 1 menit), OLED remot menampilkan persen, remot restart sendiri dan aplikasi menyambung ulang.
+- Jangan keluar dari aplikasi dan jangan matikan remot selama proses. Lepas baterai/motor pesawat dulu:
+  selama update remot tidak mengirim kendali ke RX.
+- Tanpa aplikasi: menu remot UPDATE FIRMWARE, sambung WiFi ESP32 TX (password Farhan2005),
+  buka 192.168.4.1 dan unggah firmware.bin dari browser.
+
+Versi 2.3
+- Tab Model: pilih CH1 sampai CH6, grafik kurva langsung berubah saat rate, expo, endpoint, trim, reverse digeser. Titik hijau = posisi stik sekarang.
+- Tab Model: kartu Mix bebas, empat mix manual (dari channel, ke channel, nilai plus atau minus persen), berlaku untuk CH1 sampai CH8 dan tersimpan per model.
+- Tab Remot: Daya pancar NRF (MIN, LOW, HIGH, MAX) dan Buzzer (jenis aktif atau pasif, nada, tes bunyi). RX tidak perlu diubah untuk daya NRF.
+- Ikon aplikasi baru.

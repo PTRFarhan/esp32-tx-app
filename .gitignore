@@ -1,0 +1,9 @@
+.pio/
+.vscode/
+build/
+.gradle/
+local.properties
+.idea/
+*.iml
+/ESP32-TX.apk
+apk_hasil/
