@@ -1,0 +1,19 @@
+CARA PAKAI
+1. Ekstrak zip ini.
+2. Di VS Code: File, Open Folder, pilih folder EdgeTX_TX_PIO (yang langsung berisi platformio.ini).
+3. Tunggu PlatformIO mengunduh platform dan pustaka (perlu internet, beberapa menit).
+4. Klik ikon centang di bar bawah untuk Build, ikon panah untuk Upload.
+5. Kalau Upload macet di "Connecting....", tahan tombol BOOT di ESP32.
+
+Pustaka (RF24, Adafruit GFX, Adafruit SSD1306, Adafruit BusIO) terunduh otomatis lewat lib_deps di platformio.ini.
+Jangan ganti nama src/main.ino menjadi main.cpp.
+
+CATATAN UPDATE FIRMWARE (OTA)
+- platformio.ini memakai partisi min_spiffs.csv (dua slot aplikasi 1,9 MB) supaya bisa update lewat WiFi.
+- Pemasangan pertama versi ini WAJIB lewat kabel USB (Upload). Setelah itu update bisa dari aplikasi atau browser.
+- File yang diunggah: .pio/build/esp32dev/firmware.bin
+- Arduino IDE: Tools > Partition Scheme > Minimal SPIFFS (1.9MB APP with OTA).
+
+CATATAN BLUETOOTH
+- Bluetooth sekarang memakai library NimBLE (otomatis diunduh lewat lib_deps) karena jauh lebih kecil dari bawaan,
+  jadi firmware muat di dua slot OTA. Di Arduino IDE pasang library "NimBLE-Arduino" versi 2.3.x lewat Library Manager.
